@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<main class="main">
+    <h2>Course Materials for Level {{ level }}</h2>
+    <ul>
+        {% if not materials%}
+            <h1>No materials yet !!!</h1>
+        {% else %}
+        {% for material in materials %}
+            <li><a href="{{ material.pdf_file.url }}" download>{{ material.title }}</a></li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+</main>
+<style>
+    .main{
+        background-color: white;
+        height: 100%;
+        width: 100%;
+    }
+
+</style>
+
+{% endblock %}

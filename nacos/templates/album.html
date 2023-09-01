@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Album{% endblock %}
+{% block content %}
+<!-- Include Lightbox library via CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+
+<!-- photoalbum/templates/photoalbum/photo_list.html -->
+
+{% for title, photos in photo_sections.items %}
+<h2>{{ title }}</h2>
+<div class="photo-list">
+    {% for photo in photos %}
+        <a href="{{ photo.image.url }}" data-lightbox="image-set" data-title="{{ photo.title }}">
+            <div class="photo"> <!-- Apply the photo class -->
+                <img src="{{ photo.image.url }}" alt="{{ photo.title }}" />
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endfor %}
+
+
+
+
+
+<style>
+.photo-list {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+  gap: 20px;
+}
+h2{
+  color: white;
+  margin-top: 10px;
+}
+
+.photo {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.photo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.photo p {
+  margin: 10px 0;
+}
+.lb-outerContainer {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.lb-dataContainer {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.lb-image {
+  max-height: 80vh;
+}
+
+</style>
+
+
+
+<!-- Include lightbox2 JavaScript -->
+<script src="{% static 'path/to/lightbox2.js' %}"></script>
+
+<!-- Initialize lightbox2 (usually in a separate script tag or in a JavaScript file) -->
+<script>
+    lightbox.option({
+        'resizeDuration': 200,
+        'wrapAround': true
+    });
+</script>
+
+{% endblock %}
+
+  <!-- jQery -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+
+</html>
